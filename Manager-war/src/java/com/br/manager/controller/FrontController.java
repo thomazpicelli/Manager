@@ -3,7 +3,6 @@ package com.br.manager.controller;
 import com.br.manager.controlle.commands.Command;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,14 +32,20 @@ public class FrontController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */  
+
+            // Limpar session
+            //request.getSession().removeAttribute("buscaMusica");
+            //request.getSession().removeAttribute("buscaArtista");
+        
+            String[] classe = commandName.split("_");
+
             Command command = null;
             try {
-                command = (Command)Class.forName("com.br.manager.controller.commands."+commandName).newInstance();
+                command = (Command)Class.forName("com.br.lp3.command."+classe[0]).newInstance();
             } catch (InstantiationException | IllegalAccessException | ClassNotFoundException ex) {
-                Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.getMessage();
             }
-            command.execute(request, response);            
+            command.execute(request, response, classe[1]); 
         }
     }
 

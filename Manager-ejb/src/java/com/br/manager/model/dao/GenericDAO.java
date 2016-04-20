@@ -14,10 +14,19 @@ public interface GenericDAO<E> extends Serializable {
     
     //CREATE
     public boolean insert(E e);
+    
     //READ
     public ArrayList<E> read();
+    
+    //READ BY ID
+    public E readById(int id);
+    
+    //READ BY NAME
+    public boolean readByString(String name);
+    
     //UPDATE
     public boolean update(int pk, E e);
+    
     //DELETE
     public boolean delete(int pk);
     

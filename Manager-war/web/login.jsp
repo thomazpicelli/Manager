@@ -48,12 +48,13 @@
             </div>
             <!-- end brand -->
             <div class="login-content">
-                <form action="index.html" method="POST" class="margin-bottom-0">
+                <form class="margin-bottom-0" method="POST" action="FrontController">>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Email Address" />
+                        <input type="text" class="form-control input-lg" placeholder="Email Address" name="username"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Password" />
+                        <input type="text" class="form-control input-lg" placeholder="Password" name="password"/>
+                        <input type="hidden" name="command" value="UsuarioCommand_login"/>
                     </div>
                     <div class="checkbox m-b-20">
                         <label>

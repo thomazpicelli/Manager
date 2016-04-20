@@ -48,23 +48,23 @@
             </div>
             <!-- end brand -->
             <div class="login-content">
-                <form action="index.html" method="POST" class="margin-bottom-0">
+                <form class="margin-bottom-0" method="POST" action="FrontController">
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Username" />
+                        <input type="text" class="form-control input-lg" placeholder="Username" name="username"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Password" />
+                        <input type="text" class="form-control input-lg" placeholder="Password" name="password"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Confirm Password" />
+                        <input type="text" class="form-control input-lg" placeholder="Confirm Password" name="password2"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Email Address" />
+                        <input type="text" class="form-control input-lg" placeholder="Email Address" name="email"/>
                     </div>
                     <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Phone" />
+                        <input type="hidden" name="command" value="UsuarioCommand_Registro"/>
                     </div>
-                    
                     <div class="login-buttons">
                         <button type="submit" class="btn btn-success btn-block btn-lg">Register</button>
                     </div>

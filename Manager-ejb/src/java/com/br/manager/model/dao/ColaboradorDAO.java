@@ -1,7 +1,7 @@
 package com.br.manager.model.dao;
 
 import com.br.manager.model.connectionFactory.ConnectionFactory;
-import com.br.manager.model.javabeans.ClasseModelo;
+import com.br.manager.model.javabeans.Colaborador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,30 +9,39 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Lucas Brasilio dos Santos
+ * @author TPicelli
  */
-public class ModeloDAO implements GenericDAO<ClasseModelo> {
+public class ColaboradorDAO implements GenericDAO<Colaborador>{
     private static Connection connection;
     private static PreparedStatement pst;
     private static ResultSet rs;
 
-    public ModeloDAO() {
+    public ColaboradorDAO() {
         ConnectionFactory cf = new ConnectionFactory();
-        connection = cf.getConnection("derby");
+        connection = cf.getConnection("mysql");
     }
-
     @Override
-    public boolean insert(ClasseModelo e) {
+    public boolean insert(Colaborador e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<ClasseModelo> read() {
+    public ArrayList<Colaborador> read() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(int pk, ClasseModelo e) {
+    public Colaborador readById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean readByString(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(int pk, Colaborador e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
