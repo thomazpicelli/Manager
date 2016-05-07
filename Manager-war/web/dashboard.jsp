@@ -5,7 +5,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8" />
-	<title>Color Admin | Basic Tables</title>
+	<title>Pagina Inicial</title>
 	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -49,7 +49,7 @@
 			</ol>
 			<!-- end breadcrumb -->
 			<!-- begin page-header -->
-			<h1 class="page-header">Dashboard</h1>
+			<h1 class="page-header">Página Inicial</h1>
 			<!-- end page-header -->
 			<!-- begin row -->
 			<div class="row">
@@ -67,44 +67,70 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Hover Table</h4>
+                            <h4 class="panel-title">Tarefas pendentes</h4>
                         </div>
                         <div class="panel-body">
+                            
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Username</th>
-                                        <th>Email Address</th>
+                                        <th>Atividade</th>
+                                        <th>Descrição</th>
+                                        <th>Prazo</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <c:forEach var="ap" items="${atividadePendente}">
+                                        <tr>    
+                                            <td>${ap.getNomeAtividade()}</td>
+                                            <td>${ap.getDescricao()}</td>
+                                            <td>${ap.getPrazo()}</td>
+                                            <td>${ap.getStatus()}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-inverse" data-sortable-id="table-basic-2">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Tarefas pendentes</h4>
+                        </div>
+                        <div class="panel-body">
+                            
+                            <table class="table table-hover">
+                                <thead>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Nicky Almera</td>
-                                        <td>nicky@hotmail.com</td>
+                                        <th>#</th>
+                                        <th>Atividade</th>
+                                        <th>Descrição</th>
+                                        <th>Prazo</th>
+                                        <th>Status</th>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Edmund Wong</td>
-                                        <td>edmund@yahoo.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Harvinder Singh</td>
-                                        <td>harvinder@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Terry Khoo</td>
-                                        <td>terry@gmail.com</td>
-                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="ap" items="${atividadePendente}">
+                                        <tr>    
+                                            <td>${ap.getNomeAtividade()}</td>
+                                            <td>${ap.getDescricao()}</td>
+                                            <td>${ap.getPrazo()}</td>
+                                            <td>${ap.getStatus()}</td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <!-- end panel -->
-			        <!-- begin panel -->
+                    <!-- begin panel -->
                     	<div class="row">
 			    <!-- begin col-12 -->
 			    <div class="col-md-12">

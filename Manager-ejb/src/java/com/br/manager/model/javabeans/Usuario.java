@@ -24,6 +24,12 @@ public abstract class Usuario implements Serializable{
         this.Telefone = Telefone;
     }
 
+    public Usuario(String Username, String Password) {
+        this.Username = Username;
+        this.Password = Password;
+    }
+    
+
     public int getCdUsuario() {
         return CdUsuario;
     }
