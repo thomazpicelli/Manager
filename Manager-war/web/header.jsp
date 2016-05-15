@@ -3,16 +3,17 @@
         <div class="container-fluid">
                 <!-- begin mobile sidebar expand / collapse button -->
                 <div class="navbar-header">
-                        <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> Management</a>
+                        <a href="dashboard.jsp" class="navbar-brand"><span class="navbar-logo"></span> Management</a>
                         <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                                <!--<span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>-->
                         </button>
                 </div>
                 <!-- end mobile sidebar expand / collapse button -->
-
+                
                 <!-- begin header navigation right -->
+                <!--
                 <ul class="nav navbar-nav navbar-right">
                         <li>
                                 <form class="navbar-form full-width">
@@ -96,7 +97,7 @@
                                         <li><a href="javascript:;">Log Out</a></li>
                                 </ul>
                         </li>
-                </ul>
+                </ul>-->
                 <!-- end header navigation right -->
         </div>
         <!-- end container-fluid -->

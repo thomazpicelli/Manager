@@ -1,4 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+    Document   : CadastroUsuario
+    Created on : May 13, 2016, 9:59:51 PM
+    Author     : TPicelli
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -7,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <c:redirect url="login.jsp"/>
+        <h1>Hello World!</h1>
     </body>
 </html>

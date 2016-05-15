@@ -22,6 +22,11 @@ public class UsuarioCommand implements Command{
                 }*/
                 break;
             case "Registro":
+                String loginr = request.getParameter("username");
+                String senhar = request.getParameter("password");
+                String senha2 = request.getParameter("password2");
+                String email = request.getParameter("email");
+                String telefone = request.getParameter("phone");
                 break;
             default:
         }

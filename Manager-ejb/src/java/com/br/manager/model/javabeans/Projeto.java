@@ -8,7 +8,8 @@ import java.util.ArrayList;
  *
  * @author TPicelli
  */
-public class Projeto implements Serializable{
+public class Projeto implements Serializable {
+
     private int CdProjeto;
     private String Nome;
     private String Descricao;
@@ -96,5 +97,4 @@ public class Projeto implements Serializable{
         this.Tarefas = Tarefas;
     }
 
-    
 }

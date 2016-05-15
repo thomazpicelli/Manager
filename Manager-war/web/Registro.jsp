@@ -20,6 +20,10 @@
 	<link href="assets/css/theme/default.css" rel="stylesheet" id="theme" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
+        <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+	<link href="assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
+	
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="assets/plugins/pace/pace.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
@@ -48,21 +52,24 @@
             </div>
             <!-- end brand -->
             <div class="login-content">
-                <form class="margin-bottom-0" method="POST" action="FrontController">
-                    <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Username" name="username"/>
+                <form class="margin-bottom-0" method="POST" name="registroform" data-parsley-validate="true" action="FrontController">
+                    <div class="alert alert-danger">
+                        Usuário ou Email já cadastrados
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Password" name="password"/>
+                        <input type="text" class="form-control input-lg" placeholder="Usuário" id="username" name="username" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Confirm Password" name="password2"/>
+                        <input type="text" class="form-control input-lg" placeholder="Senha" name="password" id="password" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Email Address" name="email"/>
+                        <input type="text" class="form-control input-lg" placeholder="Confirma Senha" name="password2" id="password2" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Phone" />
+                        <input type="text" class="form-control input-lg" placeholder="Email" name="email" id="email" data-parsley-type="email" data-parsley-required="true"/>
+                    </div>
+                    <div class="form-group m-b-20">
+                        <input type="text" class="form-control input-lg" placeholder="Telefone" name="telefone" id="telefone" data-parsley-type="number"/>
                         <input type="hidden" name="command" value="UsuarioCommand_Registro"/>
                     </div>
                     <div class="login-buttons">
@@ -94,7 +101,8 @@
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="assets/js/login-v2.demo.min.js"></script>
+	<script src="assets/plugins/parsley/dist/parsley.js"></script>
+        <script src="assets/js/login-v2.demo.min.js"></script>
 	<script src="assets/js/apps.min.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 

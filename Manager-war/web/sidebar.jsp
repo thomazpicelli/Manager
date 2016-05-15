@@ -5,10 +5,10 @@
         <!-- begin sidebar user -->
         <ul class="nav">
             <li class="nav-profile">
-                <div class="image">
+                <!--<div class="image">
                     <a href="javascript:;"><img src="assets/img/user-13.jpg" alt="" /></a>
-                </div>
-                <div class="info">
+                </div>-->
+                <div class="info">Olá, USUARIO
                     ${usuario.getNomeUsuario()}
                 </div>
             </li>
@@ -17,7 +17,14 @@
         <!-- begin sidebar nav -->
         <ul class="nav">
             <li class="nav-header">
-                Projetos
+                <div class="panel-heading">
+                    <a class="text-white" href="CadastroProjeto.jsp" style="text-decoration: none; ">
+                        <span class="label label-success m-r-10 pull-left">+</span>Novo projeto
+                    </a>
+                </div>
+                <div class="panel-heading">
+                    <h4 class="title text-white">Projetos</h4>
+                </div>
             </li>
             <c:forEach var="p" items="${projeto}">
                 <li class="has-sub">

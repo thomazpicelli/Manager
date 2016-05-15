@@ -6,7 +6,8 @@ import java.io.Serializable;
  *
  * @author TPicelli
  */
-public abstract class Usuario implements Serializable{
+public abstract class Usuario implements Serializable {
+
     private int CdUsuario;
     private String Username;
     private String Password;
@@ -28,7 +29,6 @@ public abstract class Usuario implements Serializable{
         this.Username = Username;
         this.Password = Password;
     }
-    
 
     public int getCdUsuario() {
         return CdUsuario;

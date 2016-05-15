@@ -20,7 +20,11 @@
 	<link href="assets/css/theme/default.css" rel="stylesheet" id="theme" />
 	<!-- ================== END BASE CSS STYLE ================== -->
 	
-	<!-- ================== BEGIN BASE JS ================== -->
+	<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+	<link href="assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
+	<!-- ================== END PAGE LEVEL STYLE ================== -->
+	
+        <!-- ================== BEGIN BASE JS ================== -->
 	<script src="assets/plugins/pace/pace.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
 </head>
@@ -48,24 +52,27 @@
             </div>
             <!-- end brand -->
             <div class="login-content">
-                <form class="margin-bottom-0" method="POST" action="FrontController">>
-                    <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Email Address" name="username"/>
+                <form class="margin-bottom-0" method="POST" data-parsley-validate="true" name="loginform" action="FrontController">
+                    <div class="alert alert-danger">
+                        Usuário ou Senha inválidos
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Password" name="password"/>
+                        <input type="text" class="form-control input-lg" placeholder="Usuário" name="username" id="username" data-parsley-required="true"/>
+                    </div>
+                    <div class="form-group m-b-20">
+                        <input type="text" class="form-control input-lg" placeholder="Senha" name="password" id="password" data-parsley-required="true"/>
                         <input type="hidden" name="command" value="UsuarioCommand_login"/>
                     </div>
                     <div class="checkbox m-b-20">
                         <label>
-                            <input type="checkbox" /> Remember Me
+                            <input type="checkbox" /> Lembrar-me
                         </label>
                     </div>
                     <div class="login-buttons">
-                        <button type="submit" class="btn btn-success btn-block btn-lg">Sign in</button>
+                        <button type="submit" class="btn btn-success btn-block btn-lg">Entrar</button>
                     </div>
                     <div class="m-t-20">
-                        Not a member yet? Click <a href="Registro.jsp">here</a> to register.
+                        Ainda não é membro? Clique <a href="Registro.jsp">Aqui</a> para se cadastrar.
                     </div>
                 </form>
             </div>
@@ -90,7 +97,8 @@
 	<!-- ================== END BASE JS ================== -->
 	
 	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-	<script src="assets/js/login-v2.demo.min.js"></script>
+	<script src="assets/plugins/parsley/dist/parsley.js"></script>
+        <script src="assets/js/login-v2.demo.min.js"></script>
 	<script src="assets/js/apps.min.js"></script>
 	<!-- ================== END PAGE LEVEL JS ================== -->
 
