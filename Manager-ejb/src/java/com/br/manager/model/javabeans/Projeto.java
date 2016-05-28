@@ -15,14 +15,14 @@ public class Projeto implements Serializable {
     private String Descricao;
     private Date DtInicio;
     private Date DtPrevisaoFim;
-    private Gerente Gerente;
-    private ArrayList<Usuario> Usuarios;
+    private Colaborador Gerente;
+    private ArrayList<Colaborador> Usuarios;
     private ArrayList<Tarefa> Tarefas;
 
     public Projeto() {
     }
 
-    public Projeto(int CdProjeto, String Nome, String Descricao, Date DtInicio, Date DtPrevisaoFim, Gerente Gerente, ArrayList<Usuario> Usuarios, ArrayList<Tarefa> Tarefas) {
+    public Projeto(int CdProjeto, String Nome, String Descricao, Date DtInicio, Date DtPrevisaoFim, Colaborador Gerente, ArrayList<Colaborador> Usuarios, ArrayList<Tarefa> Tarefas) {
         this.CdProjeto = CdProjeto;
         this.Nome = Nome;
         this.Descricao = Descricao;
@@ -73,19 +73,19 @@ public class Projeto implements Serializable {
         this.DtPrevisaoFim = DtPrevisaoFim;
     }
 
-    public Gerente getGerente() {
+    public Colaborador getGerente() {
         return Gerente;
     }
 
-    public void setGerente(Gerente Gerente) {
+    public void setGerente(Colaborador Gerente) {
         this.Gerente = Gerente;
     }
 
-    public ArrayList<Usuario> getUsuarios() {
+    public ArrayList<Colaborador> getUsuarios() {
         return Usuarios;
     }
 
-    public void setUsuarios(ArrayList<Usuario> Usuarios) {
+    public void setUsuarios(ArrayList<Colaborador> Usuarios) {
         this.Usuarios = Usuarios;
     }
 
@@ -95,6 +95,11 @@ public class Projeto implements Serializable {
 
     public void setTarefas(ArrayList<Tarefa> Tarefas) {
         this.Tarefas = Tarefas;
+    }
+
+    @Override
+    public String toString() {
+        return "Projeto{" + "CdProjeto=" + CdProjeto + ", Nome=" + Nome + ", Descricao=" + Descricao + ", DtInicio=" + DtInicio + ", DtPrevisaoFim=" + DtPrevisaoFim + ", Gerente=" + Gerente + ", Usuarios=" + Usuarios + ", Tarefas=" + Tarefas + '}';
     }
 
 }

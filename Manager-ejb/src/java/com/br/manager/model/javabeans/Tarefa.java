@@ -14,7 +14,10 @@ public class Tarefa implements Serializable{
     private Date DtFinal;
     private Colaborador Colaborador;
     private Status Status;
-
+    public enum Status {
+        NAO_INICIADA, INICIADA, INCOMPLETA, FINALIZANDO, TESTE, FINALIZADA, CANCELADA;
+    }
+    
     public Tarefa() {
     }
     
@@ -73,6 +76,11 @@ public class Tarefa implements Serializable{
 
     public void setStatus(Status Status) {
         this.Status = Status;
+    }
+
+    @Override
+    public String toString() {
+        return "Tarefa{" + "CdTarefa=" + CdTarefa + ", Nome=" + Nome + ", Descricao=" + Descricao + ", DtFinal=" + DtFinal + ", Colaborador=" + Colaborador + ", Status=" + Status + '}';
     }
 
 }

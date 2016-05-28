@@ -1,26 +1,37 @@
 package com.br.manager.model.dao;
 
 import com.br.manager.model.connectionFactory.ConnectionFactory;
+import com.br.manager.model.javabeans.Colaborador;
 import com.br.manager.model.javabeans.Projeto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author TPicelli
  */
+@Stateless
+@LocalBean
 public class ProjetoDAO implements GenericDAO<Projeto>{
+    @EJB
+    private ColaboradorDAO colaboradorDAO;
     private static Connection connection;
     private static PreparedStatement pst;
     private static ResultSet rs;
 
     public ProjetoDAO() {
         ConnectionFactory cf = new ConnectionFactory();
-        connection = cf.getConnection("mysql");
-    }
-    
+        connection = cf.getConnection("derby");
+    }    
+
     @Override
     public boolean insert(Projeto e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -28,7 +39,73 @@ public class ProjetoDAO implements GenericDAO<Projeto>{
 
     @Override
     public ArrayList<Projeto> read() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Projeto> lista = new ArrayList<>();
+        try{
+            String sql = "SELECT * FROM PROJETO";
+            pst = connection.prepareStatement(sql); 
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Projeto p = new Projeto(rs.getInt("CD_PROJETO"), rs.getString("NM_PROJETO"), rs.getString("DC_PROJETO"), rs.getDate("DT_INICIO"), rs.getDate("DT_PREVISAO_FINALIZACAO"), new Colaborador(rs.getInt("CD_COORDENADOR")), null, null);
+                lista.add(p);
+            }
+        }catch(SQLException ex){
+            try {
+                connection.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(ProjetoDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            System.out.println(ex.getMessage());
+        }
+        finally{
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjetoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+
+    @Override
+    public ArrayList<Projeto> readByUser(int cdUsuario) {
+        ArrayList<Projeto> lista = new ArrayList<>();
+        try{
+            String sql = "SELECT P.* FROM PROJETO P WHERE P.CD_COORDENADOR = ?";
+            pst = connection.prepareStatement(sql); 
+            pst.setInt(1, cdUsuario);
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Projeto p = new Projeto(rs.getInt("CD_PROJETO"), rs.getString("NM_PROJETO"), rs.getString("DC_PROJETO"), rs.getDate("DT_INICIO"), rs.getDate("DT_PREVISAO_FINALIZACAO"), new Colaborador(rs.getInt("CD_COORDENADOR")), null, null);
+                lista.add(p);
+            }
+            
+            sql = "SELECT P.* FROM PROJETO P INNER JOIN PROJETO_USUARIO PU ON P.CD_PROJETO = PU.CD_PROJETO WHERE PU.CD_USUARIO = ?";
+            pst = connection.prepareStatement(sql); 
+            pst.setInt(1, cdUsuario);
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Projeto p = new Projeto(rs.getInt("CD_PROJETO"), rs.getString("NM_PROJETO"), rs.getString("DC_PROJETO"), rs.getDate("DT_INICIO"), rs.getDate("DT_PREVISAO_FINALIZACAO"), new Colaborador(rs.getInt("CD_COORDENADOR")), null, null);
+                lista.add(p);
+            }
+        }catch(SQLException ex){
+            try {
+                connection.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(ProjetoDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            System.out.println(ex.getMessage());
+        }
+        finally{
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjetoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
     }
 
     @Override
@@ -37,7 +114,12 @@ public class ProjetoDAO implements GenericDAO<Projeto>{
     }
 
     @Override
-    public boolean readByString(String name) {
+    public Projeto readByString(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Projeto> readByFK(int cdFK) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -50,5 +132,4 @@ public class ProjetoDAO implements GenericDAO<Projeto>{
     public boolean delete(int pk) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

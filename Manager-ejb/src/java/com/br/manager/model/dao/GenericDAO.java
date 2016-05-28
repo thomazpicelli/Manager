@@ -18,11 +18,17 @@ public interface GenericDAO<E> extends Serializable {
     //READ
     public ArrayList<E> read();
     
+    //READ BY USER
+    public ArrayList<E> readByUser(int cdUsuario);
+    
     //READ BY ID
     public E readById(int id);
     
     //READ BY NAME
-    public boolean readByString(String name);
+    public E readByString(String name);
+    
+    //READ BY FOREIGN KEY
+    public ArrayList<E> readByFK(int cdFK);
     
     //UPDATE
     public boolean update(int pk, E e);

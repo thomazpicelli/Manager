@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -53,9 +54,11 @@
             <!-- end brand -->
             <div class="login-content">
                 <form class="margin-bottom-0" method="POST" data-parsley-validate="true" name="loginform" action="FrontController">
-                    <div class="alert alert-danger">
-                        Usuário ou Senha inválidos
-                    </div>
+                    <c:if test="${auth != null && auth != true}">  
+                        <div class="alert alert-danger">
+                            Usuário ou Senha inválidos
+                        </div>
+                    </c:if>
                     <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Usuário" name="username" id="username" data-parsley-required="true"/>
                     </div>

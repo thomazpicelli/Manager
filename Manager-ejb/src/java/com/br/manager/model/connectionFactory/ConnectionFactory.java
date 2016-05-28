@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     private final String driver = "org.apache.derby.jdbc.ClientDriver";
     private final String protocolo = "jdbc:derby:";
-    private final String dbname = "cinema_bd";
+    private final String dbname = "bd";
     private final String dominio = "//localhost:1527/";
     private Connection connection;
 
@@ -25,7 +25,7 @@ public class ConnectionFactory {
         if(tipo.equalsIgnoreCase("derby")) {
             try {
                 Class.forName(driver).newInstance();
-                connection = DriverManager.getConnection(protocolo + dominio + dbname, "mack", "mack");
+                connection = DriverManager.getConnection(protocolo + dominio + dbname, "bd", "bd");
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                 ex.printStackTrace();
             }

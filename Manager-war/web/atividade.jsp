@@ -52,7 +52,7 @@
                     <div class="vertical-box-column width-md">
                         <div class="vertical-box">
                             <div class="wrapper bg-grey-lighter text-uppercase" style="font-size: 16pt;">
-                                <b>Nome do Projeto Aqui${projetoAtual.getNomeProjeto()}</b>
+                                <b>${projeto.getNome()}</b>
                             </div>
                             <div class="vertical-box-row bg-grey-lighter text-white">
                                 <div class="vertical-box-cell">
@@ -70,8 +70,9 @@
                                 </div>
                             </div>
                             <div class="wrapper bg-grey-lighter" style="color: black;">
-                                <form action="frontcontroller" method="POST">
-                                    <input type="hidden" name="command" value="projetoCommand_Voltar"/>
+                                <form action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="ProjetoCommand_atual"/>
+                                   <input type="hidden" name="cdProjeto" value="${projeto.getCdProjeto()}"/> 
                                     <a href="#" onclick="$(this).closest('form').submit()">
                                         Voltar
                                     </a>
@@ -91,28 +92,28 @@
                                             <div class="row">
                                                 <div class="panel panel-inverse" data-sortable-id="ui-widget-5">
                                                     <div class="panel-heading">
-                                                        <h4 class="panel-title">Descrição do Projeto</h4>
+                                                        <div class="panel-heading-btn">
+                                                            <a href="" class="btn btn-warning">EDITAR</a>
+                                                        </div>
+                                                        <h4 class="panel-title">${tarefa.getNome()}</h4>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <p>Descrição do projeto aqui</p>
-                                                        <p>${projeto.getDescricao()}</p>
-                                                        <p></p>
-                                                        <b><p>Início do Projeto</p></b>
-                                                        <p>aaaa${projeto.getDtInicio()}</p>
-                                                        <b><p>Previsão de Entrega</p></b>
-                                                        <p>aaaa${projeto.getDtFinalizacao()}</p>
+                                                        <b><p>Descrição:</p></b>
+                                                        <p>${tarefa.getDescricao()}</p>
+                                                        <b><p>Dados do responsável:</p></b>
+                                                        <p>${tarefa.getColaborador().getNome()} - ${tarefa.getColaborador().getEmail()}</p>
+                                                        <b><p>Previsão de Finalização</p></b>
+                                                        <p>${tarefa.getDtFinal()}</p>
+                                                        <b><p>Status</p></b>
+                                                        <p>${tarefa.getStatus()}</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                  
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="wrapper bg-grey-lighter text-white">
-                                Nothing
-                            </div>
                         </div>
                     </div>
                 </div>

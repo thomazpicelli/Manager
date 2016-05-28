@@ -8,7 +8,15 @@ import java.io.Serializable;
  */
 public class Colaborador extends Usuario implements Serializable {
 
-    private void EditarStatusTarefa(Tarefa t, Status status) {
+    public Colaborador(int CdUsuario, String Username, String Password, String Nome, String Email, String Telefone, NivelAcesso nivelacesso) {
+        super(CdUsuario, Username, Password, Nome, Email, Telefone, nivelacesso);
+    }
+
+    public Colaborador() {
+    }
+
+    public Colaborador(int CdUsuario) {
+        super(CdUsuario);
     }
 
 }

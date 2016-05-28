@@ -4054,6 +4054,34 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: #eee;
   border-color: #337ab7;
 }
+.nav > li > form > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: white;
+}
+.nav > li > form > a:hover,
+.nav > li > form > a:focus {
+  text-decoration: none;
+  background-color: #757474;
+}
+.nav > li.disabled > form > a {
+  color: #777;
+}
+.nav > li.disabled > form > a:hover,
+.nav > li.disabled > form >a:focus {
+  color: #777;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: blue;
+}
+.nav .open > form > a,
+.nav .open > form > a:hover,
+.nav .open > form > a:focus {
+  background-color: #eee;
+  border-color: #337ab7;
+}
 .nav .nav-divider {
   height: 1px;
   margin: 9px 0;

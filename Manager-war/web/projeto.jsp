@@ -52,7 +52,7 @@
                     <div class="vertical-box-column width-md">
                         <div class="vertical-box">
                             <div class="wrapper bg-grey-lighter text-uppercase" style="font-size: 16pt;">
-                                <b>Nome do Projeto Aqui${projetoAtual.getNomeProjeto()}</b>
+                                <b>${projeto.getNome()}</b>
                             </div>
                             <div class="vertical-box-row bg-grey-lighter text-white">
                                 <div class="vertical-box-cell">
@@ -91,68 +91,48 @@
                                                         <h4 class="panel-title">Descrição do Projeto</h4>
                                                     </div>
                                                     <div class="panel-body">
-                                                        <p>Descrição do projeto aqui</p>
+                                                        <b><p>Descrição:</p></b>
                                                         <p>${projeto.getDescricao()}</p>
-                                                        <p></p>
+                                                        <b><p>Responsável</p></b>
+                                                        <p>${projeto.getGerente().getNome()} - ${projeto.getGerente().getEmail()}</p>
                                                         <b><p>Início do Projeto</p></b>
-                                                        <p>aaaa${projeto.getDtInicio()}</p>
+                                                        <p>${projeto.getDtInicio()}</p>
                                                         <b><p>Previsão de Entrega</p></b>
-                                                        <p>aaaa${projeto.getDtFinalizacao()}</p>
+                                                        <p>${projeto.getDtPrevisaoFim()}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                                <div class="row">
-			    <!-- begin panel -->
-			        <div class="panel panel-inverse" data-sortable-id="ui-media-object-1">
-                                        <div class="panel-heading">
-                                            <div class="panel-heading-btn">
-                                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                                            </div>
-                                            <a href="CadastroUsuario.jsp"><span class="label label-success m-r-10 pull-left">+</span></a>
-                                            <h4 class="panel-title">Participantes do Projeto</h4>
-                                        </div>
-                                        <div class="panel-body">
-                                                        <c:forEach var="pusu" items="${projetoUsuarios}">
+                                            <div class="row">
+                                                <!-- begin panel -->
+                                                <div class="panel panel-inverse" data-sortable-id="ui-media-object-1">
+                                                    <div class="panel-heading">
+                                                        <div class="panel-heading-btn">
+                                                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                                            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                                                        </div>
+                                                        <a href="CadastroUsuario.jsp"><span class="label label-success m-r-10 pull-left">+</span></a>
+                                                        <h4 class="panel-title">Participantes do Projeto</h4>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <c:forEach var="pusu" items="${projeto.getUsuarios()}">
                                                             <div class="media media-sm">
-                                                                    <a class="media-left" href="javascript:;">
-                                                                        <i class="icon-user"></i>
-                                                                    </a>
-                                                                    <div class="media-body">
-                                                                            <h4 class="media-heading media-sm">Nome do Participante${pusu.getNomeUsuario()}</h4>
-                                                                    </div>
+                                                                <a class="media-left" href="javascript:;">
+                                                                    <i class="icon-user"></i>
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <h4 class="media-heading media-sm">${pusu.getNome()} - ${pusu.getEmail()}</h4>
+                                                                </div>
                                                             </div>
                                                         </c:forEach>      
-                                                                <div class="media media-sm">        
-                                                                    <a class="media-left" href="javascript:;">
-                                                                        <i class="icon-user"></i>
-                                                                    </a>
-                                                                    <div class="media-body">
-                                                                            <h4 class="media-heading media-sm">Nome do Participante${pusu.getNomeUsuario()}</h4>
-                                                                    </div>
-                                                            </div>
-                                                                            <div class="media media-sm">
-                                                                    <a class="media-left" href="javascript:;">
-                                                                        <i class="icon-user"></i>
-                                                                    </a>
-                                                                    <div class="media-body">
-                                                                            <h4 class="media-heading media-sm">Nome do Participante${pusu.getNomeUsuario()}</h4>
-                                                                    </div>
-                                                            </div>
-						</div>
-                                        </div>
-			        <!-- end panel -->
-                                        </div>
-			
+                                                    </div>
+                                                </div>
+                                                <!-- end panel -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="wrapper bg-grey-lighter text-white">
-                                Nothing
                             </div>
                         </div>
                     </div>

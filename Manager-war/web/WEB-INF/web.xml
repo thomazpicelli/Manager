@@ -13,4 +13,34 @@
             30
         </session-timeout>
     </session-config>
+    <ejb-local-ref>
+        <ejb-ref-name>ColaboradorDAO</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.br.manager.model.dao.GenericDAO</local>
+        <ejb-link>Manager-ejb.jar#ColaboradorDAO</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ProjetoDAO</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.br.manager.model.dao.GenericDAO</local>
+        <ejb-link>Manager-ejb.jar#ProjetoDAO</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ProjetoDAO1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.br.manager.model.dao.GenericDAO</local>
+        <ejb-link>Manager-ejb.jar#ProjetoDAO</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ColaboradorDAO1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.br.manager.model.dao.GenericDAO</local>
+        <ejb-link>Manager-ejb.jar#ColaboradorDAO</ejb-link>
+    </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>TarefaDAO</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.br.manager.model.dao.GenericDAO</local>
+        <ejb-link>Manager-ejb.jar#TarefaDAO</ejb-link>
+    </ejb-local-ref>
 </web-app>

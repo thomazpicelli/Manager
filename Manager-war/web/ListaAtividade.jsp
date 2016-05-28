@@ -21,15 +21,36 @@
                         <th>Responsável</th>
                         <th>Data Finalização</th>
                         <th>Status</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <c:forEach var="apa" items="${atividadeProjetoAtual}">
-                        <tr>    
-                            <td>${ap.getNomeAtividade()}</td>
-                            <td>${ap.getUsuario().getNomeUsuario()}</td>
-                            <td>${ap.getPrazo()}</td>
-                            <td>${ap.getStatus()}</td>
+                <tbody style="color: #000;">
+                    <c:forEach var="t" items="${projeto.getTarefas()}">
+                        <tr> 
+                            <td></td>
+                            <td>${t.getNome()}</td>
+                            <td>${t.getColaborador().getNome()}</td>
+                            <td>${t.getDtFinal()}</td>
+                            <td>${t.getStatus()}</td>
+                            <td>
+                                <form action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="TarefaCommand_deleta"/>
+                                    <input type="hidden" name="CdTarefa" value="${t.getCdTarefa()}"/>
+                                    <a href="#" class="btn btn-small btn-icon btn-circle btn-danger" onclick="$(this).closest('form').submit()">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="FrontController" method="POST">
+                                    <input type="hidden" name="command" value="TarefaCommand_atual"/>
+                                    <input type="hidden" name="CdTarefa" value="${t.getCdTarefa()}"/>                                    
+                                    <a href="#" class="btn btn-small btn-icon btn-circle btn-success" onclick="$(this).closest('form').submit()">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </form>
+                            </td>    
                         </tr>
                     </c:forEach>                    
                 </tbody>
