@@ -4,6 +4,7 @@ import com.br.manager.model.connectionFactory.ConnectionFactory;
 import com.br.manager.model.javabeans.Colaborador;
 import com.br.manager.model.javabeans.Projeto;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +35,40 @@ public class ProjetoDAO implements GenericDAO<Projeto>{
 
     @Override
     public boolean insert(Projeto e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = false;
+        try {
+            String sql = "INSERT INTO PROJETO(NM_PROJETO, DC_PROJETO, CD_COORDENADOR, DT_INICIO, DT_PREVISAO_FINALIZACAO) VALUES(?,?,?,?,?)";
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, e.getNome());
+            pst.setString(2, e.getDescricao());
+            pst.setInt(3, e.getGerente().getCdUsuario());
+            pst.setDate(4,(Date)e.getDtInicio());
+            pst.setDate(5, (Date)e.getDtPrevisaoFim());
+            
+            int r = pst.executeUpdate();
+            if(r>0)
+                resultado = true;
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;
+    }
+    
+    public boolean insertPU(int Colaborador, int Projeto) {
+        boolean resultado = false;
+        try {
+            String sql = "INSERT INTO PROJETO_USUARIO(CD_PROJETO, CD_USUARIO) VALUES(?,?)";
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, Projeto);
+            pst.setInt(2, Colaborador);
+            
+            int r = pst.executeUpdate();
+            if(r>0)
+                resultado = true;
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;
     }
 
     @Override

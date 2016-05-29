@@ -4,7 +4,10 @@ import com.br.manager.model.dao.*;
 import com.br.manager.model.javabeans.*;
 import com.br.manager.model.javabeans.Usuario.NivelAcesso;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -12,6 +15,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
 /**
  *
@@ -21,14 +25,18 @@ public class ProjetoCommand implements Command{
     TarefaDAO tarefaDAO = lookupTarefaDAOBean();
     ColaboradorDAO colaboradorDAO = lookupColaboradorDAOBean();
     ProjetoDAO projetoDAO = lookupProjetoDAOBean();
-
+    
+    private int CdProjeto;
+    private Usuario u;
+    
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response, String commando) {
         switch(commando){
             case "getCurrent":
                 //Com base no usuario, carrega projetos(usuarios e atividades)
-                Usuario u = (Usuario)request.getSession().getAttribute("usuario");
+                u = (Usuario)request.getSession().getAttribute("usuario");
                 
+                projetoDAO = new ProjetoDAO();
                 ArrayList<Projeto> projetos = null;
                 if(u.getNivelAcesso() == NivelAcesso.ADMINISTRADOR)
                     projetos = projetoDAO.read();
@@ -47,23 +55,26 @@ public class ProjetoCommand implements Command{
                     projeto.setUsuarios(colaboradorDAO.readByFK(projeto.getCdProjeto()));
                 }
                 
+                colaboradorDAO = new ColaboradorDAO();
+                ArrayList<Colaborador> colaborador = colaboradorDAO.readByGerente(u.getCdUsuario());
+                
                 //Carrega TAREFAS
                 for (Projeto projeto : projetos) {
+                    ArrayList<Tarefa> tarefa = new ArrayList();
                     for (Colaborador usuario : projeto.getUsuarios()) {
                         tarefaDAO = new TarefaDAO();
-                        projeto.setTarefas(tarefaDAO.readByFK(usuario, projeto.getCdProjeto()));
+                        tarefa.addAll(tarefaDAO.readByFK(usuario, projeto.getCdProjeto()));
                     }
+                    projeto.setTarefas(tarefa);
                 }
                 
                 request.getSession().setAttribute("projetos", projetos);
+                request.getSession().setAttribute("colaborador", colaborador);
                 request.getSession().setAttribute("projeto", null);
                 request.getSession().setAttribute("atividade", null);
-                for (Projeto projeto : projetos) {
-                    System.out.println(projeto.toString());
-                }
                 break;
             case "atual":
-                int CdProjeto = Integer.parseInt(request.getParameter("cdProjeto"));
+                CdProjeto = Integer.parseInt(request.getParameter("cdProjeto"));
                 ArrayList<Projeto> lista = (ArrayList<Projeto>)request.getSession().getAttribute("projetos");
                 for (Projeto p : lista) {
                     if(p.getCdProjeto() == CdProjeto)
@@ -73,6 +84,50 @@ public class ProjetoCommand implements Command{
                     response.sendRedirect("projeto.jsp");
                 } catch (IOException ex) {
                     Logger.getLogger(ProjetoCommand.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case "criar":
+                u = (Usuario)request.getSession().getAttribute("usuario");
+                ArrayList<Colaborador> colaboradores = (ArrayList<Colaborador>) request.getSession().getAttribute("colaborador");
+                
+                String nome = request.getParameter("nome");
+                String descricao  = request.getParameter("descricao");
+                String[] c = request.getParameterValues("colaborador");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date d1 = null, d2 = null;
+                
+                    //d1 = (Date) sdf.parse(request.getParameter("dtInicio"));
+                    //d2 = (Date) sdf.parse(request.getParameter("dtFim"));
+                    d1 = java.sql.Date.valueOf("2016-06-30");
+                    d2 = java.sql.Date.valueOf("2016-06-30");
+                    
+                ArrayList<Colaborador> col = new ArrayList<>();
+                for (String c1 : c) {
+                    col.add(new Colaborador(Integer.parseInt(c1)));
+                }
+                
+                Projeto p = new Projeto(-1, nome, descricao, d1, d2, (Colaborador)u, col, null);
+                
+                projetoDAO = new ProjetoDAO();
+                boolean ok = projetoDAO.insert(p);
+                if(ok){
+                    for (Colaborador col1 : col) {
+                        projetoDAO = new ProjetoDAO();
+                        //projetoDAO.insertPU(col1.getCdUsuario(), p.getCdProjeto())
+                    }
+                    request.getSession().setAttribute("projeto", p);
+                    try {
+                        response.sendRedirect("projeto.jsp");
+                    } catch (IOException ex) {
+                        Logger.getLogger(ProjetoCommand.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else{
+                    try {
+                        response.sendRedirect("CadastroProjeto.jsp");
+                    } catch (IOException ex) {
+                        Logger.getLogger(ProjetoCommand.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 break;
             default:

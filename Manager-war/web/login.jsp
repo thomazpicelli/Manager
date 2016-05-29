@@ -59,6 +59,11 @@
                             Usuário ou Senha inválidos
                         </div>
                     </c:if>
+                    <c:if test="${RegOk != null && RegOk != false}">  
+                        <div class="alert alert-success">
+                            Cadastro realizado com sucesso
+                        </div>
+                    </c:if>
                     <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Usuário" name="username" id="username" data-parsley-required="true"/>
                     </div>

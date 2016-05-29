@@ -52,7 +52,7 @@
                     <div class="vertical-box-column width-md">
                         <div class="vertical-box">
                             <div class="wrapper bg-grey-lighter text-uppercase" style="font-size: 16pt;">
-                                <b>Nome do Projeto Aqui${projetoAtual.getNomeProjeto()}</b>
+                                <b>${projeto.getNome()}</b>
                             </div>
                             <div class="vertical-box-row bg-grey-lighter text-white">
                                 <div class="vertical-box-cell">

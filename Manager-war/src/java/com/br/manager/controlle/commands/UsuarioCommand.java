@@ -2,8 +2,12 @@ package com.br.manager.controlle.commands;
 
 import com.br.manager.model.dao.ColaboradorDAO;
 import com.br.manager.model.javabeans.Colaborador;
+import com.br.manager.model.javabeans.Usuario;
+import com.br.manager.model.javabeans.Usuario.NivelAcesso;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -50,12 +54,75 @@ public class UsuarioCommand implements Command{
                     }
                 }
                 break;
-            case "Registro":
+            case "registro":
+                //INICIALIZE
+                request.getSession().setAttribute("senhaAuth", true);
+                request.getSession().setAttribute("regAuth", true);
+                request.getSession().setAttribute("RegOk", false);
+                
+                //PARAMETERS FORM
                 String loginr = request.getParameter("username");
                 String senhar = request.getParameter("password");
-                String senha2 = request.getParameter("password2");
-                String email = request.getParameter("email");
-                String telefone = request.getParameter("phone");
+                String senhar2 = request.getParameter("password2");
+                String nomer = request.getParameter("nome");
+                String emailr = request.getParameter("email");
+                String telefoner = request.getParameter("phone");
+                int tipor = Integer.parseInt(request.getParameter("tipo"));
+                
+                
+                //VALIDACAO DE SENHA
+                if(!senhar.endsWith(senhar2)){
+                    try {
+                        request.getSession().setAttribute("senhaAuth", false);
+                        response.sendRedirect("Registro.jsp");
+                    } catch (IOException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+                }
+                
+                //VALIDACAO DE DUPLICIDADE USUARIO
+                colaboradorDAO = new ColaboradorDAO();
+                ArrayList<Colaborador> todos = colaboradorDAO.read();
+                
+                for (Colaborador todo : todos) {
+                    if(todo.getEmail().equals(emailr) || todo.getUsername().equals(loginr)){
+                        try {
+                            request.getSession().setAttribute("regAuth", false);
+                            response.sendRedirect("Registro.jsp");
+                        } catch (IOException ex) {
+                            System.out.println(ex.getMessage());
+                        }
+                    }
+                }
+                
+                //INSERE
+                NivelAcesso n = null;
+                if(tipor == 2)
+                    n =  Usuario.NivelAcesso.GERENTE;
+                else
+                    n = Usuario.NivelAcesso.DESENVOLVEDOR;
+                
+                Colaborador novo = new Colaborador(-1, loginr, senhar, nomer, emailr, telefoner, n);
+                colaboradorDAO = new ColaboradorDAO();
+                boolean ok = colaboradorDAO.insert(novo);
+ 
+                if(ok){
+                    try {
+                        request.getSession().setAttribute("RegOk", true);
+                        response.sendRedirect("login.jsp");
+                    } catch (IOException ex) {
+                        Logger.getLogger(UsuarioCommand.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else{
+                    try {
+                        request.getSession().setAttribute("regAuth", false);
+                        response.sendRedirect("Registro.jsp");
+                    } catch (IOException ex) {
+                        Logger.getLogger(UsuarioCommand.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                    
                 break;
             default:
         }

@@ -69,7 +69,7 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
             
             rs = pst.executeQuery();
             while (rs.next()) {
-                Tarefa t = new Tarefa(rs.getInt("CD_TAREFA"), rs.getString("NM_TAREFA"), rs.getString("DC_TAREFA"), rs.getDate("DT_FINALIZACAO"), c, null);
+                Tarefa t = new Tarefa(rs.getInt("CD_TAREFA"), rs.getString("NM_TAREFA"), rs.getString("DC_TAREFA"), rs.getDate("DT_FINALIZACAO"), rs.getString("DC_FERRAMENTA"), c, null);
                 switch(rs.getInt("CD_STATUS")){
                     case 1: t.setStatus(Tarefa.Status.NAO_INICIADA); break;
                     case 2: t.setStatus(Tarefa.Status.INICIADA); break;

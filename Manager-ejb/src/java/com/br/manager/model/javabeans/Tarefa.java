@@ -12,6 +12,7 @@ public class Tarefa implements Serializable{
     private String Nome;
     private String Descricao;
     private Date DtFinal;
+    private String Ferramenta;
     private Colaborador Colaborador;
     private Status Status;
     public enum Status {
@@ -20,12 +21,13 @@ public class Tarefa implements Serializable{
     
     public Tarefa() {
     }
-    
-    public Tarefa(int CdTarefa, String Nome, String Descricao, Date DtFinal, Colaborador Colaborador, Status Status) {
+
+    public Tarefa(int CdTarefa, String Nome, String Descricao, Date DtFinal, String Ferramenta, Colaborador Colaborador, Status Status) {
         this.CdTarefa = CdTarefa;
         this.Nome = Nome;
         this.Descricao = Descricao;
         this.DtFinal = DtFinal;
+        this.Ferramenta = Ferramenta;
         this.Colaborador = Colaborador;
         this.Status = Status;
     }
@@ -62,6 +64,14 @@ public class Tarefa implements Serializable{
         this.DtFinal = DtFinal;
     }
 
+    public String getFerramenta() {
+        return Ferramenta;
+    }
+
+    public void setFerramenta(String Ferramenta) {
+        this.Ferramenta = Ferramenta;
+    }
+
     public Colaborador getColaborador() {
         return Colaborador;
     }
@@ -80,7 +90,7 @@ public class Tarefa implements Serializable{
 
     @Override
     public String toString() {
-        return "Tarefa{" + "CdTarefa=" + CdTarefa + ", Nome=" + Nome + ", Descricao=" + Descricao + ", DtFinal=" + DtFinal + ", Colaborador=" + Colaborador + ", Status=" + Status + '}';
+        return "Tarefa{" + "CdTarefa=" + CdTarefa + ", Nome=" + Nome + ", Descricao=" + Descricao + ", DtFinal=" + DtFinal + ", Ferramenta=" + Ferramenta + ", Colaborador=" + Colaborador + ", Status=" + Status + '}';
     }
 
 }

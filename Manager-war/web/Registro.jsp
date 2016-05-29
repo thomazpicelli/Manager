@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -53,9 +54,16 @@
             <!-- end brand -->
             <div class="login-content">
                 <form class="margin-bottom-0" method="POST" name="registroform" data-parsley-validate="true" action="FrontController">
-                    <div class="alert alert-danger">
-                        Usuário ou Email já cadastrados
-                    </div>
+                    <c:if test="${regAuth != null && regAuth != true}">  
+                        <div class="alert alert-danger">
+                            Usuário ou Email já cadastrados
+                        </div>
+                    </c:if>
+                    <c:if test="${senhaAuth != null && senhaAuth != true}">  
+                        <div class="alert alert-danger">
+                            Senha inválida
+                        </div>
+                    </c:if>
                     <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Usuário" id="username" name="username" data-parsley-required="true"/>
                     </div>
@@ -66,11 +74,21 @@
                         <input type="text" class="form-control input-lg" placeholder="Confirma Senha" name="password2" id="password2" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
+                        <input type="text" class="form-control input-lg" placeholder="Nome" name="nome" id="nome" data-parsley-required="true"/>
+                    </div>
+                    <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Email" name="email" id="email" data-parsley-type="email" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Telefone" name="telefone" id="telefone" data-parsley-type="number"/>
-                        <input type="hidden" name="command" value="UsuarioCommand_Registro"/>
+                        <input type="hidden" name="command" value="UsuarioCommand_registro"/>
+                    </div>
+                    <div class="form-group m-b-20">
+                        <p>Perfil</p><br>
+                        <select name="tipo" class="form-control">
+                            <option selected value="3">DESENVOLVEDOR</option>
+                            <option value="2">GERENTE</option>
+                        </select>
                     </div>
                     <div class="login-buttons">
                         <button type="submit" class="btn btn-success btn-block btn-lg">Register</button>

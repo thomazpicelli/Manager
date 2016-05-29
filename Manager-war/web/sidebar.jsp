@@ -20,7 +20,7 @@
         <!-- begin sidebar nav -->
         <ul class="nav">
             <li class="nav-header">
-                <c:if test="${usuario.getNivelAcesso()} == DESENVOLVEDOR">
+                <c:if test="${usuario.getNivelAcesso() != 'DESENVOLVEDOR'}">
                     <div class="panel-heading">
                         <a class="text-white" href="CadastroProjeto.jsp" style="text-decoration: none; ">
                             <span class="label label-success m-r-10 pull-left">+</span>Novo projeto

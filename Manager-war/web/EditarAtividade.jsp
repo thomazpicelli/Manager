@@ -90,33 +90,82 @@
                                     <div class="vertical-box-inner-cell">
                                         <div data-scrollbar="true" data-height="100%" class="wrapper">
                                             <div class="row">
-                                                <div class="panel panel-inverse" data-sortable-id="ui-widget-5">
-                                                    <div class="panel-heading">
-                                                        <c:if test="${usuario.getNivelAcesso() != 'DESENVOLVEDOR' || tarefa.getColaborador().getCdUsuario() == usuario.getCdUsuario()}">
-                                                        <div class="panel-heading-btn">
-                                                            <a href="EditarAtividade.jsp" class="btn btn-warning">EDITAR</a>
-                                                        </div>
-                                                        </c:if>
-                                                        <h4 class="panel-title">${tarefa.getNome()}</h4>
-                                                    </div>
-                                                    <div class="panel-body" style="font-size: 12pt;">
-                                                        <b><p>Descrição:</p></b>
-                                                        <p>${tarefa.getDescricao()}</p>
-                                                        <b><p>Ferramenta:</p></b>
-                                                        <p>${tarefa.getFerramenta()}</p>
-                                                        <b><p>Dados do responsável:</p></b>
-                                                        <p>${tarefa.getColaborador().getNome()} - ${tarefa.getColaborador().getEmail()}</p>
-                                                        <b><p>Previsão de Finalização</p></b>
-                                                        <p>${tarefa.getDtFinal()}</p>
-                                                        <b><p>Status</p></b>
-                                                        <p>${tarefa.getStatus()}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <!-- begin panel -->
+                    <div class="panel panel-inverse" data-sortable-id="form-validation-1">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">Basic Form Validation</h4>
+                        </div>
+                        <div class="panel-body panel-form">
+                            <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="fullname">Nome * :</label>
+									<div class="col-md-6 col-sm-6">
+                                                                            <input class="form-control" type="text" id="nome" name="nome" placeholder="Nome"  value="${tarefa.getNome()}" data-parsley-required="true" />
+									</div>
+									<label class="control-label col-md-4 col-sm-4" for="email">Descrição * :</label>
+									<div class="col-md-6 col-sm-6">
+                                                                            <input class="form-control" type="text" id="descricao" name="descricao" placeholder="Descrição" value="${tarefa.getDescricao()}" data-parsley-required="true" />
+									</div>
+									<label class="control-label col-md-4 col-sm-4" for="email">Email * :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="email" name="email" data-parsley-type="email" placeholder="Email" data-parsley-required="true" />
+									</div>
+									<label class="control-label col-md-4 col-sm-4" for="email">Email * :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="email" name="email" data-parsley-type="email" placeholder="Email" data-parsley-required="true" />
+									</div>
+                                                                        
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="website">Website :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="url" id="website" name="website" data-parsley-type="url" placeholder="url" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="message">Message (20 chars min, 200 max) :</label>
+									<div class="col-md-6 col-sm-6">
+										<textarea class="form-control" id="message" name="message" rows="4" data-parsley-range="[20,200]" placeholder="Range from 20 - 200"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="message">Digits :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="digits" name="digits" data-parsley-type="digits" placeholder="Digits" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="message">Number :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="number" name="number" data-parsley-type="number" placeholder="Number" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4" for="message">Phone :</label>
+									<div class="col-md-6 col-sm-6">
+										<input class="form-control" type="text" id="data-phone" data-parsley-type="number" placeholder="(XXX) XXXX XXX" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4 col-sm-4"></label>
+									<div class="col-md-6 col-sm-6">
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</div>
+								</div>
+                            </form>
+                        </div>
+                    </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
