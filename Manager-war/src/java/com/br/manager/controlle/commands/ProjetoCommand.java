@@ -4,7 +4,6 @@ import com.br.manager.model.dao.*;
 import com.br.manager.model.javabeans.*;
 import com.br.manager.model.javabeans.Usuario.NivelAcesso;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
@@ -15,7 +14,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
 /**
  *
@@ -68,8 +66,13 @@ public class ProjetoCommand implements Command{
                     projeto.setTarefas(tarefa);
                 }
                 
+                //Carrega COUNT STATUS
+                tarefaDAO = new TarefaDAO();
+                ArrayList<CountStatus> cs = tarefaDAO.readByStatus(u.getCdUsuario());
+                
                 request.getSession().setAttribute("projetos", projetos);
                 request.getSession().setAttribute("colaborador", colaborador);
+                request.getSession().setAttribute("countStatus", cs);
                 request.getSession().setAttribute("projeto", null);
                 request.getSession().setAttribute("atividade", null);
                 break;

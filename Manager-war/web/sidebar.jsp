@@ -30,7 +30,10 @@
                 <div class="panel-heading">
                     <h4 class="title text-white">Projetos</h4>
                 </div>
-            </li>            
+            </li>
+            <li>
+                <form ><a href="dashboard.jsp"><span>Paginal Inicial</span></a></form>
+            </li>
             <c:forEach var="p" items="${projetos}">
                 <li>
                     <form action="FrontController"  method="POST">

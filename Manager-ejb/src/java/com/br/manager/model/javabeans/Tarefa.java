@@ -18,7 +18,7 @@ public class Tarefa implements Serializable{
     public enum Status {
         NAO_INICIADA, INICIADA, INCOMPLETA, FINALIZANDO, TESTE, FINALIZADA, CANCELADA;
     }
-    
+        
     public Tarefa() {
     }
 

@@ -1,3 +1,4 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -50,9 +51,6 @@
 			    <!-- begin col-6 -->
 			    <div class="col-md-6">
 			        <!-- begin panel -->
-                    
-                    <!-- end panel -->
-			        <!-- begin panel -->
                     <div class="panel panel-inverse" data-sortable-id="table-basic-2">
                         <div class="panel-heading">
                             <div class="panel-heading-btn">
@@ -61,7 +59,7 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Tarefas pendentes</h4>
+                            <h4 class="panel-title">TAREFAS PENDENTES</h4>
                         </div>
                         <div class="panel-body">
                             
@@ -69,173 +67,53 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Projeto</th>
                                         <th>Atividade</th>
-                                        <th>Descrição</th>
-                                        <th>Prazo</th>
+                                        <th>Data Finalização</th>
+                                        <th>Ferramenta</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach var="ap" items="${atividadePendente}">
-                                        <tr>    
-                                            <td>${ap.getNomeAtividade()}</td>
-                                            <td>${ap.getDescricao()}</td>
-                                            <td>${ap.getPrazo()}</td>
-                                            <td>${ap.getStatus()}</td>
-                                        </tr>
+                                    <c:forEach var="projeto" items="${projetos}">
+                                        <c:forEach var="tarefa" items="${projeto.getTarefas()}">
+                                            <c:if test="${tarefa.getColaborador().getCdUsuario() == usuario.getCdUsuario()}">
+                                                <c:if test="${tarefa.getStatus() != 'FINALIZADA' && tarefa.getStatus() != 'CANCELADA'}">
+                                                    <tr>    
+                                                        <td></td>
+                                                        <td>${projeto.getNome()}</td>
+                                                        <td>${tarefa.getNome()}</td>
+                                                        <td>${tarefa.getDtFinal()}</td>
+                                                        <td>${tarefa.getFerramenta()}</td>
+                                                        <td>${tarefa.getStatus()}</td>
+                                                    </tr>
+                                                </c:if>
+                                            </c:if>
+                                        </c:forEach>
                                     </c:forEach>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                    <div class="panel panel-inverse" data-sortable-id="table-basic-2">
-                        <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                            </div>
-                            <h4 class="panel-title">Tarefas pendentes</h4>
-                        </div>
-                        <div class="panel-body">
-                            
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Atividade</th>
-                                        <th>Descrição</th>
-                                        <th>Prazo</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="ap" items="${atividadePendente}">
-                                        <tr>    
-                                            <td>${ap.getNomeAtividade()}</td>
-                                            <td>${ap.getDescricao()}</td>
-                                            <td>${ap.getPrazo()}</td>
-                                            <td>${ap.getStatus()}</td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- end panel -->
-                    <!-- begin panel -->
-                    	<div class="row">
-			    <!-- begin col-12 -->
-			    <div class="col-md-12">
-			        <!-- begin panel -->
-                    <div class="panel panel-inverse" data-sortable-id="table-basic-7">
-                        <div class="panel-heading">
-                            <div class="panel-heading-btn">
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
-                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
-                            </div>
-                            <h4 class="panel-title">Tarefas em aberto</h4>
-                        </div>
-                        <div class="panel-body">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Tarefa</th>
-											<th>Data</th>
-											<th></th>
-											<th></th>
-											<th></th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Table heading</th>
-											<th>Table heading</th>
-											<th>Table heading</th>
-											<th>Table heading</th>
-											<th>Table heading</th>
-											<th>Table heading</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-											<td>Table cell</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-                    <!-- end panel -->
+
 			    </div>
-			    <!-- end col-12 -->
-			</div>
 			<!-- end row -->
-		</div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-inverse" data-sortable-id="ui-widget-5">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">RESUMO DE ATIVIDADE</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                        <c:forEach var="count" items="${countStatus}">
+                                                            <p><b>${count.getStatus()}: </b>${count.getCount()}</p>
+                                                        </c:forEach>     
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 		<!-- end #content -->
 		
 		<!-- begin scroll to top btn -->
