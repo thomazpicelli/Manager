@@ -82,7 +82,7 @@
                     <div class="vertical-box-column width-md">
                         <div class="vertical-box">
                             <div class="wrapper bg-grey-lighter" style="font-size: 14pt;">
-                                Atividade
+                                Cadastro de Atividade
                             </div>
                             <div class="vertical-box-row bg-grey-lighter">
                                 <div class="vertical-box-cell">
@@ -98,68 +98,54 @@
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                             </div>
-                            <h4 class="panel-title">Basic Form Validation</h4>
+                            <h4 class="panel-title">Cadastro de Atividade</h4>
                         </div>
                         <div class="panel-body panel-form">
-                            <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form">
+                            <form class="form-horizontal form-bordered" data-parsley-validate="true" name="demo-form" action="FrontController" method="POST">
 								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="fullname">Full Name * :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="fullname" name="fullname" placeholder="Required" data-parsley-required="true" />
+									<label class="control-label col-md-3 col-sm-3" for="nome">Nome * :</label>
+									<div class="col-md-7 col-sm-7">
+										<input class="form-control" type="text" id="nome" name="nome" placeholder="Nome" data-parsley-required="true" />
+									</div>
+                                                                        <label class="control-label col-md-3 col-sm-3" for="descricao">Descrição * :</label>
+                                                                        <div class="col-md-7 col-sm-7">
+										<textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Descrição da Atividade" data-parsley-required="true" /></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="email">Email * :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="email" name="email" data-parsley-type="email" placeholder="Email" data-parsley-required="true" />
+									<label class="control-label col-md-3 col-sm-3" for="ferramenta">Ferramenta :</label>
+									<div class="col-md-7 col-sm-7">
+										<input class="form-control" type="text" id="ferramenta" name="ferramenta" placeholder="Ferramenta" />
 									</div>
+                                                                        <label class="control-label col-md-3 col-sm-3" for="datafim">Data Finalização *:</label>
+                                                                        <div class="col-md-7 col-sm-7">
+                                                                            <input class="form-control" type="text" id="datafim" name="datafim" placeholder="____-__-__"/>
+                                                                        </div>
 								</div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label col-md-3 col-sm-3">Responsável</label>
+                                                                    <div class="col-md-7 col-sm-7">    
+                                                                        <select name="responsavel" class="form-control">
+                                                                            <c:forEach var="c" items="${colaborador}">
+                                                                                <option value="${c.getCdUsuario()}">${c.getNome()}</option>
+                                                                            </c:forEach>               
+                                                                        </select>
+                                                                    </div>
+                                                               </div>
+                                                                <input type="hidden" name="command" value="TarefaCommand_nova"/>
 								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="website">Website :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="url" id="website" name="website" data-parsley-type="url" placeholder="url" />
+									<label class="control-label col-md-3 col-sm-3"></label>
+									<div class="col-md-7 col-sm-7">
+										<button type="submit" class="btn btn-primary">Cadastrar</button>
 									</div>
 								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="message">Message (20 chars min, 200 max) :</label>
-									<div class="col-md-6 col-sm-6">
-										<textarea class="form-control" id="message" name="message" rows="4" data-parsley-range="[20,200]" placeholder="Range from 20 - 200"></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="message">Digits :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="digits" name="digits" data-parsley-type="digits" placeholder="Digits" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="message">Number :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="number" name="number" data-parsley-type="number" placeholder="Number" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4" for="message">Phone :</label>
-									<div class="col-md-6 col-sm-6">
-										<input class="form-control" type="text" id="data-phone" data-parsley-type="number" placeholder="(XXX) XXXX XXX" />
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4 col-sm-4"></label>
-									<div class="col-md-6 col-sm-6">
-										<button type="submit" class="btn btn-primary">Submit</button>
-									</div>
-								</div>
-                            </form>
-                        </div>
-                    </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="wrapper bg-grey-lighter text-white">
-                                Nothing
                             </div>
                         </div>
                     </div>

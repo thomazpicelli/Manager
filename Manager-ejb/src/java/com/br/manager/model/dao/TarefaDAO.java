@@ -5,6 +5,7 @@ import com.br.manager.model.javabeans.Colaborador;
 import com.br.manager.model.javabeans.CountStatus;
 import com.br.manager.model.javabeans.Tarefa;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,6 +34,38 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
     @Override
     public boolean insert(Tarefa e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean insert(Tarefa e, int CdUsuario, int CdProjeto) {
+        boolean resultado = false;
+        try {
+            String sql = "SELECT PU.CD_PROJETO_USUARIO FROM PROJETO P INNER JOIN PROJETO_USUARIO PU ON PU.CD_PROJETO = P.CD_PROJETO WHERE P.CD_PROJETO = ? AND PU.CD_USUARIO = ?";
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, CdProjeto);
+            pst.setInt(2, CdUsuario);
+            rs = pst.executeQuery();
+            
+            int CdProjetoUsuario = 0;
+            while (rs.next()) {
+                CdProjetoUsuario = rs.getInt("CD_PROJETO_USUARIO");
+            }
+            
+            sql = "INSERT INTO TAREFA(NM_TAREFA, DC_TAREFA, CD_PROJETO_USUARIO, DT_FINALIZACAO, DC_FERRAMENTA, CD_STATUS) VALUES(?,?,?,?,?,?)";
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, e.getNome());
+            pst.setString(2, e.getDescricao());
+            pst.setInt(3, CdProjetoUsuario);
+            pst.setDate(4,(Date)e.getDtFinal());
+            pst.setString(5, e.getFerramenta());
+            pst.setInt(6, 1);
+            
+            int r = pst.executeUpdate();
+            if(r>0)
+                resultado = true;
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;       
     }
 
     @Override
@@ -63,7 +96,7 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
     public ArrayList<Tarefa> readByFK(Colaborador c, int cdProjeto) {
         ArrayList<Tarefa> lista = new ArrayList<>();
         try{
-            String sql = "SELECT T.* FROM TAREFA T INNER JOIN PROJETO_USUARIO PU ON PU.CD_PROJETO_USUARIO = T.CD_PROJETO_USUARIO INNER JOIN PROJETO P ON P.CD_PROJETO = PU.CD_PROJETO WHERE PU.CD_USUARIO = ? AND PU.CD_PROJETO = ?";
+            String sql = "SELECT T.* FROM TAREFA T INNER JOIN PROJETO_USUARIO PU ON PU.CD_PROJETO_USUARIO = T.CD_PROJETO_USUARIO INNER JOIN PROJETO P ON P.CD_PROJETO = PU.CD_PROJETO WHERE PU.CD_USUARIO = ? AND PU.CD_PROJETO = ? ORDER BY T.DT_FINALIZACAO";
             pst = connection.prepareStatement(sql); 
             pst.setInt(1, c.getCdUsuario());
             pst.setInt(2, cdProjeto);
@@ -152,9 +185,51 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public boolean update(int t, Tarefa e, int CdUsuario, int CdProjeto) {
+        boolean resultado = false;
+        try {
+            String sql = "SELECT PU.CD_PROJETO_USUARIO FROM PROJETO P INNER JOIN PROJETO_USUARIO PU ON PU.CD_PROJETO = P.CD_PROJETO WHERE P.CD_PROJETO = ? AND PU.CD_USUARIO = ?";
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, CdProjeto);
+            pst.setInt(2, CdUsuario);
+            rs = pst.executeQuery();
+            
+            int CdProjetoUsuario = 0;
+            while (rs.next()) {
+                CdProjetoUsuario = rs.getInt("CD_PROJETO_USUARIO");
+            }
+            
+            sql = "UPDATE TAREFA SET DC_TAREFA = ?, CD_PROJETO_USUARIO = ?, DT_FINALIZACAO = ?, DC_FERRAMENTA = ?, CD_STATUS = ? WHERE CD_TAREFA = ?";
+            pst = connection.prepareStatement(sql);
+            pst.setString(1, e.getDescricao());
+            pst.setInt(3, CdProjetoUsuario);
+            pst.setDate(4,(Date)e.getDtFinal());
+            pst.setString(5, e.getFerramenta());
+            pst.setInt(6, e.getStatus().ordinal()+1);
+            
+            int r = pst.executeUpdate();
+            if(r>0)
+                resultado = true;
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;       
+    }
+
     @Override
     public boolean delete(int pk) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean resultado = false;
+        try {
+            String sql = "DELETE FROM TAREFA WHERE CD_TAREFA = ?";
+            pst = connection.prepareStatement(sql);
+            pst.setInt(1, pk); 
+            int r = pst.executeUpdate();
+            if(r>0)
+                resultado = true;
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException.getMessage());
+        }
+        return resultado;
     }
     
 }

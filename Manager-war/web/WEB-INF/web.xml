@@ -43,4 +43,10 @@
         <local>com.br.manager.model.dao.GenericDAO</local>
         <ejb-link>Manager-ejb.jar#TarefaDAO</ejb-link>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>TarefaDAO1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.br.manager.model.dao.GenericDAO</local>
+        <ejb-link>Manager-ejb.jar#TarefaDAO</ejb-link>
+    </ejb-local-ref>
 </web-app>

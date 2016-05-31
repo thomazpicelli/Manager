@@ -31,6 +31,7 @@ public class ProjetoCommand implements Command{
     public void execute(HttpServletRequest request, HttpServletResponse response, String commando) {
         switch(commando){
             case "getCurrent":
+                request.getSession().setAttribute("projetos", null);
                 //Com base no usuario, carrega projetos(usuarios e atividades)
                 u = (Usuario)request.getSession().getAttribute("usuario");
                 
@@ -73,8 +74,16 @@ public class ProjetoCommand implements Command{
                 request.getSession().setAttribute("projetos", projetos);
                 request.getSession().setAttribute("colaborador", colaborador);
                 request.getSession().setAttribute("countStatus", cs);
-                request.getSession().setAttribute("projeto", null);
-                request.getSession().setAttribute("atividade", null);
+                break;
+            case "refrash":
+                Projeto projetooo = (Projeto)request.getSession().getAttribute("projeto");
+                CdProjeto = projetooo.getCdProjeto();
+                
+                ArrayList<Projeto> listaR = (ArrayList<Projeto>)request.getSession().getAttribute("projetos");
+                for (Projeto p : listaR) {
+                    if(p.getCdProjeto() == CdProjeto)
+                        request.getSession().setAttribute("projeto", p);
+                }
                 break;
             case "atual":
                 CdProjeto = Integer.parseInt(request.getParameter("cdProjeto"));
