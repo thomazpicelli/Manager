@@ -185,7 +185,7 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean update(int t, Tarefa e, int CdUsuario, int CdProjeto) {
+    public boolean update(Tarefa e, int CdUsuario, int CdProjeto) {
         boolean resultado = false;
         try {
             String sql = "SELECT PU.CD_PROJETO_USUARIO FROM PROJETO P INNER JOIN PROJETO_USUARIO PU ON PU.CD_PROJETO = P.CD_PROJETO WHERE P.CD_PROJETO = ? AND PU.CD_USUARIO = ?";
@@ -199,13 +199,15 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
                 CdProjetoUsuario = rs.getInt("CD_PROJETO_USUARIO");
             }
             
-            sql = "UPDATE TAREFA SET DC_TAREFA = ?, CD_PROJETO_USUARIO = ?, DT_FINALIZACAO = ?, DC_FERRAMENTA = ?, CD_STATUS = ? WHERE CD_TAREFA = ?";
+            sql = "UPDATE TAREFA SET NM_TAREFA = ?, DC_TAREFA = ?, CD_PROJETO_USUARIO = ?, DT_FINALIZACAO = ?, DC_FERRAMENTA = ?, CD_STATUS = ? WHERE CD_TAREFA = ?";
             pst = connection.prepareStatement(sql);
-            pst.setString(1, e.getDescricao());
+            pst.setString(1, e.getNome());
+            pst.setString(2, e.getDescricao());
             pst.setInt(3, CdProjetoUsuario);
             pst.setDate(4,(Date)e.getDtFinal());
             pst.setString(5, e.getFerramenta());
             pst.setInt(6, e.getStatus().ordinal()+1);
+            pst.setInt(7, e.getCdTarefa());
             
             int r = pst.executeUpdate();
             if(r>0)

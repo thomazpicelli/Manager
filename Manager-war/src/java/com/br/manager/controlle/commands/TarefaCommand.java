@@ -95,6 +95,7 @@ public class TarefaCommand implements Command{
                 u = (Usuario)request.getSession().getAttribute("usuario");
                 Projeto proje = (Projeto) request.getSession().getAttribute("projeto");
                 
+                String nomeU = request.getParameter("nome");
                 String descricaoU  = request.getParameter("descricao");
                 String ferramentaU  = request.getParameter("ferramenta");
                 String datafimU = request.getParameter("datafim");
@@ -116,12 +117,13 @@ public class TarefaCommand implements Command{
                 
                 Date d = java.sql.Date.valueOf(datafimU);
                     
-                Tarefa tar = new Tarefa(-1, null, descricaoU, d, ferramentaU, new Colaborador(CdResponsavelU), s);
+                Tarefa tar = new Tarefa(tarrr.getCdTarefa(), nomeU, descricaoU, d, ferramentaU, new Colaborador(CdResponsavelU), s);
                 tarefaDAO = new TarefaDAO();
-                boolean ok2 = tarefaDAO.update(tarrr.getCdTarefa(),tar, CdResponsavelU, proje.getCdProjeto());
+                boolean ok2 = tarefaDAO.update(tar, CdResponsavelU, proje.getCdProjeto());
                 if(ok2){
                     ProjetoCommand pCom = new ProjetoCommand();
                     pCom.execute(request, response, "getCurrent");
+                    pCom.execute(request, response, "refrash");
                     try {
                         response.sendRedirect("projeto.jsp");
                     } catch (IOException ex) {

@@ -2,6 +2,7 @@ package com.br.manager.controlle.commands;
 
 import com.br.manager.model.dao.*;
 import com.br.manager.model.javabeans.*;
+import com.br.manager.model.javabeans.Tarefa.Status;
 import com.br.manager.model.javabeans.Usuario.NivelAcesso;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -67,6 +68,12 @@ public class ProjetoCommand implements Command{
                     projeto.setTarefas(tarefa);
                 }
                 
+                // CARREGA STATUS
+                ArrayList<Status> statuss = new ArrayList();
+                for (Status s : Status.values()) {
+                    statuss.add(s);
+                }
+                
                 //Carrega COUNT STATUS
                 tarefaDAO = new TarefaDAO();
                 ArrayList<CountStatus> cs = tarefaDAO.readByStatus(u.getCdUsuario());
@@ -74,6 +81,7 @@ public class ProjetoCommand implements Command{
                 request.getSession().setAttribute("projetos", projetos);
                 request.getSession().setAttribute("colaborador", colaborador);
                 request.getSession().setAttribute("countStatus", cs);
+                request.getSession().setAttribute("status", statuss);
                 break;
             case "refrash":
                 Projeto projetooo = (Projeto)request.getSession().getAttribute("projeto");
