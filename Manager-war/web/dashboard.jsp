@@ -77,7 +77,7 @@
                                 <tbody>
                                     <c:forEach var="projeto" items="${projetos}">
                                         <c:forEach var="tarefa" items="${projeto.getTarefas()}">
-                                            <c:if test="${tarefa.getColaborador().getCdUsuario() == usuario.getCdUsuario()}">
+                                            <c:if test="${tarefa.getColaborador().getCdUsuario() == usuario.getCdUsuario() || projeto.getGerente().getCdUsuario() == usuario.getCdUsuario()}">
                                                 <c:if test="${tarefa.getStatus() != 'FINALIZADA' && tarefa.getStatus() != 'CANCELADA'}">
                                                     <tr>    
                                                         <td></td>

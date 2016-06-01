@@ -113,13 +113,10 @@ public class ProjetoCommand implements Command{
                 String nome = request.getParameter("nome");
                 String descricao  = request.getParameter("descricao");
                 String[] c = request.getParameterValues("colaborador");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
                 Date d1 = null, d2 = null;
-                
-                    //d1 = (Date) sdf.parse(request.getParameter("dtInicio"));
-                    //d2 = (Date) sdf.parse(request.getParameter("dtFim"));
-                    d1 = java.sql.Date.valueOf("2016-06-30");
-                    d2 = java.sql.Date.valueOf("2016-06-30");
+                d1 = java.sql.Date.valueOf(request.getParameter("datainicio"));
+                d2 = java.sql.Date.valueOf(request.getParameter("datafinal"));
                     
                 ArrayList<Colaborador> col = new ArrayList<>();
                 for (String c1 : c) {
@@ -133,9 +130,14 @@ public class ProjetoCommand implements Command{
                 if(ok){
                     for (Colaborador col1 : col) {
                         projetoDAO = new ProjetoDAO();
-                        //projetoDAO.insertPU(col1.getCdUsuario(), p.getCdProjeto())
+                        projetoDAO.insertPU(col1.getCdUsuario());
                     }
+                    projetoDAO = new ProjetoDAO();
+                    p = projetoDAO.readByString(p.getNome());
+                    ProjetoCommand pCom = new ProjetoCommand();
                     request.getSession().setAttribute("projeto", p);
+                    pCom.execute(request, response, "getCurrent");
+                    pCom.execute(request, response, "refrash");
                     try {
                         response.sendRedirect("projeto.jsp");
                     } catch (IOException ex) {
@@ -149,6 +151,10 @@ public class ProjetoCommand implements Command{
                         Logger.getLogger(ProjetoCommand.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                break;
+            case "deleta":
+            Projeto projetu = (Projeto)request.getSession().getAttribute("projeto");
+            //ProjetoDAO
                 break;
             default:
             try {

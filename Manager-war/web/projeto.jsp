@@ -99,7 +99,13 @@
                                                         <p>${projeto.getDtInicio()}</p>
                                                         <b><p>Previsão de Entrega</p></b>
                                                         <p>${projeto.getDtPrevisaoFim()}</p>
-                                                    </div>
+                                                    </div><!--
+                                                    <div class="panel-footer">
+                                                        <form action="FrontController" method="POST">
+                                                            <input type="hidden" name="command" value="ProjetoCommand_deleta">
+                                                            <button type="submit" class="btn-danger">EXCLUIR PROJETO</button>
+                                                        </form>
+                                                    </div>-->
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -112,7 +118,9 @@
                                                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                                                             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                                                         </div>
-                                                        <a href="CadastroUsuario.jsp"><span class="label label-success m-r-10 pull-left">+</span></a>
+                                                        <c:if test="${usuario.getNivelAcesso() != 'DESENVOLVEDOR'}">
+                                                            <a href="CadastroUsuario.jsp"><span class="label label-success m-r-10 pull-left">+</span></a>
+                                                        </c:if>
                                                         <h4 class="panel-title">Participantes do Projeto</h4>
                                                     </div>
                                                     <div class="panel-body">

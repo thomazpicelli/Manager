@@ -132,7 +132,7 @@ public class TarefaCommand implements Command{
                 }
                 else{
                     try {
-                        response.sendRedirect("CadastroAtividade.jsp");
+                        response.sendRedirect("EditarAtividade.jsp");
                     } catch (IOException ex) {
                         Logger.getLogger(TarefaCommand.class.getName()).log(Level.SEVERE, null, ex);
                     }

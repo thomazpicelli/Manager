@@ -54,12 +54,20 @@ public class ProjetoDAO implements GenericDAO<Projeto>{
         return resultado;
     }
     
-    public boolean insertPU(int Colaborador, int Projeto) {
+    public boolean insertPU(int Colaborador) {
         boolean resultado = false;
+        int CdProjeto = 0;
         try {
-            String sql = "INSERT INTO PROJETO_USUARIO(CD_PROJETO, CD_USUARIO) VALUES(?,?)";
+            String sql = "SELECT MAX(CD_PROJETO) AS CD_PROJETO FROM PROJETO";
+            pst = connection.prepareStatement(sql); 
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                CdProjeto = rs.getInt("CD_PROJETO");
+            }
+            
+            sql = "INSERT INTO PROJETO_USUARIO(CD_PROJETO, CD_USUARIO) VALUES(?,?)";
             pst = connection.prepareStatement(sql);
-            pst.setInt(1, Projeto);
+            pst.setInt(1, CdProjeto);
             pst.setInt(2, Colaborador);
             
             int r = pst.executeUpdate();
@@ -149,7 +157,32 @@ public class ProjetoDAO implements GenericDAO<Projeto>{
 
     @Override
     public Projeto readByString(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Projeto p = null;
+        try{
+            String sql = "SELECT * FROM PROJETO WHERE NM_PROJETO = ?";
+            pst = connection.prepareStatement(sql); 
+            pst.setString(1, name);
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                p = new Projeto(rs.getInt("CD_PROJETO"), rs.getString("NM_PROJETO"), rs.getString("DC_PROJETO"), rs.getDate("DT_INICIO"), rs.getDate("DT_PREVISAO_FINALIZACAO"), new Colaborador(rs.getInt("CD_COORDENADOR")), null, null);
+            }
+        }catch(SQLException ex){
+            try {
+                connection.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(ProjetoDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            System.out.println(ex.getMessage());
+        }
+        finally{
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ProjetoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return p;
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.br.manager.model.connectionFactory.ConnectionFactory;
 import com.br.manager.model.javabeans.Colaborador;
 import com.br.manager.model.javabeans.Usuario.NivelAcesso;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

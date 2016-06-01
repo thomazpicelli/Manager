@@ -136,12 +136,14 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
     
     public ArrayList<CountStatus> readByStatus(int CdUsuario) {
         ArrayList<CountStatus> lista = new ArrayList<>();
+        Tarefa.Status ts = null;
+        boolean add = false;
         try{
             String sql = "SELECT ST.CD_STATUS, COUNT(T.CD_TAREFA) AS COUNT \n" +
                         "      FROM TAREFA T  \n" +
                         "     INNER JOIN PROJETO_USUARIO PU  \n" +
                         "    ON PU.CD_PROJETO_USUARIO = T.CD_PROJETO_USUARIO \n" +
-                        "    AND PU.CD_USUARIO  = ?\n" +
+                        "    INNER JOIN PROJETO P ON P.CD_PROJETO = PU.CD_PROJETO AND P.CD_COORDENADOR = ? \n" +
                         "    RIGHT JOIN STATUS_TAREFA ST \n" +
                         "    ON ST.CD_STATUS = T.CD_STATUS \n" +
                         "    GROUP BY ST.CD_STATUS ORDER BY ST.CD_STATUS";
@@ -150,7 +152,7 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
             
             rs = pst.executeQuery();
             while (rs.next()) {
-                Tarefa.Status ts = null;
+                
                 switch(rs.getInt("CD_STATUS")){
                     case 1: ts = Tarefa.Status.NAO_INICIADA; break;
                     case 2: ts = Tarefa.Status.INICIADA; break;
@@ -161,7 +163,35 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
                     case 7: ts = Tarefa.Status.CANCELADA; break;    
                     default: ts = Tarefa.Status.CANCELADA;
                 }
-                boolean add = lista.add(new CountStatus(ts, rs.getInt("COUNT")));
+                add = lista.add(new CountStatus(ts, rs.getInt("COUNT")));
+            }
+            
+            sql = "SELECT ST.CD_STATUS, COUNT(T.CD_TAREFA) AS COUNT \n" +
+                        "      FROM TAREFA T  \n" +
+                        "     INNER JOIN PROJETO_USUARIO PU  \n" +
+                        "    ON PU.CD_PROJETO_USUARIO = T.CD_PROJETO_USUARIO \n" +
+                        "    AND PU.CD_USUARIO  = ?\n" +
+                        "    INNER JOIN PROJETO P ON P.CD_PROJETO = PU.CD_PROJETO \n" +
+                        "    RIGHT JOIN STATUS_TAREFA ST \n" +
+                        "    ON ST.CD_STATUS = T.CD_STATUS \n" +
+                        "    WHERE P.CD_COORDENADOR <> PU.CD_USUARIO \n" +
+                        "    GROUP BY ST.CD_STATUS ORDER BY ST.CD_STATUS";
+            pst = connection.prepareStatement(sql); 
+            pst.setInt(1, CdUsuario);
+            
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                switch(rs.getInt("CD_STATUS")){
+                    case 1: ts = Tarefa.Status.NAO_INICIADA; break;
+                    case 2: ts = Tarefa.Status.INICIADA; break;
+                    case 3: ts = Tarefa.Status.INCOMPLETA; break;
+                    case 4: ts = Tarefa.Status.FINALIZANDO; break;
+                    case 5: ts = Tarefa.Status.TESTE; break;
+                    case 6: ts = Tarefa.Status.FINALIZADA; break;
+                    case 7: ts = Tarefa.Status.CANCELADA; break;    
+                    default: ts = Tarefa.Status.CANCELADA;
+                }
+                add = lista.add(new CountStatus(ts, rs.getInt("COUNT")));
             }
         }catch(SQLException ex){
             try {
@@ -180,6 +210,7 @@ public class TarefaDAO implements GenericDAO<Tarefa>{
         }
         return lista;
     }
+    
     @Override
     public boolean update(int pk, Tarefa e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
