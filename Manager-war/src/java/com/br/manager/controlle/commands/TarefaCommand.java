@@ -94,13 +94,18 @@ public class TarefaCommand implements Command{
             case "altera":
                 u = (Usuario)request.getSession().getAttribute("usuario");
                 Projeto proje = (Projeto) request.getSession().getAttribute("projeto");
+                Tarefa tarefa = (Tarefa) request.getSession().getAttribute("tarefa");
                 
                 String nomeU = request.getParameter("nome");
                 String descricaoU  = request.getParameter("descricao");
                 String ferramentaU  = request.getParameter("ferramenta");
                 String datafimU = request.getParameter("datafim");
                 String StatusU = request.getParameter("status");
-                int CdResponsavelU = Integer.parseInt(request.getParameter("responsavel"));
+                int CdResponsavelU = 0;
+                if(request.getParameter("responsavel") != null)
+                    CdResponsavelU = Integer.parseInt(request.getParameter("responsavel"));
+                else
+                    CdResponsavelU = tarefa.getColaborador().getCdUsuario();
 
                 Tarefa.Status s = Tarefa.Status.NAO_INICIADA;
                 switch(StatusU){

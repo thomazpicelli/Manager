@@ -68,10 +68,10 @@
                         <input type="text" class="form-control input-lg" placeholder="Usuário" id="username" name="username" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Senha" name="password" id="password" data-parsley-required="true"/>
+                        <input type="password" class="form-control input-lg" placeholder="Senha" name="password" id="password" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Confirma Senha" name="password2" id="password2" data-parsley-required="true"/>
+                        <input type="password" class="form-control input-lg" placeholder="Confirma Senha" name="password2" id="password2" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
                         <input type="text" class="form-control input-lg" placeholder="Nome" name="nome" id="nome" data-parsley-required="true"/>

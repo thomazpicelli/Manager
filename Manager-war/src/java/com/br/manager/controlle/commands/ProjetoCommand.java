@@ -50,13 +50,15 @@ public class ProjetoCommand implements Command{
                 }
                 
                 //Carrega COOLABORADORES
+                ArrayList<Colaborador> colaborador = null;
                 for (Projeto projeto : projetos) {
                     colaboradorDAO = new ColaboradorDAO();
                     projeto.setUsuarios(colaboradorDAO.readByFK(projeto.getCdProjeto()));
+                    colaborador = colaboradorDAO.readByFK(projeto.getCdProjeto());
                 }
                 
-                colaboradorDAO = new ColaboradorDAO();
-                ArrayList<Colaborador> colaborador = colaboradorDAO.readByGerente(u.getCdUsuario());
+                //colaboradorDAO = new ColaboradorDAO();
+                //ArrayList<Colaborador> colaborador = colaboradorDAO.readByGerente(u.getCdUsuario());
                 
                 //Carrega TAREFAS
                 for (Projeto projeto : projetos) {

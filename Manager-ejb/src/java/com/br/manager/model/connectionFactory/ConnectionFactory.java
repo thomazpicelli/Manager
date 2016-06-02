@@ -13,6 +13,8 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
     private final String driver = "org.apache.derby.jdbc.ClientDriver";
+    private final String driverMYSQL = "com.mysql.jdbc.Driver";
+    
     private final String protocolo = "jdbc:derby:";
     private final String dbname = "bd";
     private final String dominio = "//localhost:1527/";
@@ -26,6 +28,14 @@ public class ConnectionFactory {
             try {
                 Class.forName(driver).newInstance();
                 connection = DriverManager.getConnection(protocolo + dominio + dbname, "bd", "bd");
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else if(tipo.equalsIgnoreCase("mysql")) {
+            try {
+                Class.forName(driverMYSQL).newInstance();
+                connection = DriverManager.getConnection("bd.ct7gonp4uaww.sa-east-1.rds.amazonaws.com:3306/mack", "mackmack", "mackmack");
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException ex) {
                 ex.printStackTrace();
             }

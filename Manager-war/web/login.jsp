@@ -68,7 +68,7 @@
                         <input type="text" class="form-control input-lg" placeholder="Usuário" name="username" id="username" data-parsley-required="true"/>
                     </div>
                     <div class="form-group m-b-20">
-                        <input type="text" class="form-control input-lg" placeholder="Senha" name="password" id="password" data-parsley-required="true"/>
+                        <input type="password" class="form-control input-lg" placeholder="Senha" name="password" id="password" data-parsley-required="true"/>
                         <input type="hidden" name="command" value="UsuarioCommand_login"/>
                     </div>
                     <div class="checkbox m-b-20">
