@@ -5,7 +5,6 @@ import com.br.manager.model.javabeans.*;
 import com.br.manager.model.javabeans.Tarefa.Status;
 import com.br.manager.model.javabeans.Usuario.NivelAcesso;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.logging.Level;
@@ -57,8 +56,8 @@ public class ProjetoCommand implements Command{
                     colaborador = colaboradorDAO.readByFK(projeto.getCdProjeto());
                 }
                 
-                //colaboradorDAO = new ColaboradorDAO();
-                //ArrayList<Colaborador> colaborador = colaboradorDAO.readByGerente(u.getCdUsuario());
+                colaboradorDAO = new ColaboradorDAO();
+                colaborador = colaboradorDAO.readByGerente(u.getCdUsuario());
                 
                 //Carrega TAREFAS
                 for (Projeto projeto : projetos) {
